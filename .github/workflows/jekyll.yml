@@ -19,6 +19,12 @@ jobs:
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
         
-    - name: Deploy to GitHub Pages with Container
-      uses: maxheld83/ghpages@v0.3.0
+    - name: Deploy to GitHub Pages
+      uses: actions/upload-artifact@main
+        with:
+          name: github-pages
+          path: /home/runner/work/_temp/artifact.tar
+          retention-days: 1
+          if-no-files-found: warn
+
 
